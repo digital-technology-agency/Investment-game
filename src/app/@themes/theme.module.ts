@@ -10,14 +10,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { OfferComponent } from './components/offer/offer.component';
 
 const COMPONENTS = [
     HeaderComponent, FooterComponent, ContentViewComponent, SimpleComponent,
 ];
 
 @NgModule({
-    declarations: [...COMPONENTS],
-    exports: [CommonModule, ...COMPONENTS],
+    declarations: [...COMPONENTS, OfferComponent],
+    exports: [CommonModule, ...COMPONENTS, OfferComponent],
     imports: [
         CommonModule,
         RouterModule,

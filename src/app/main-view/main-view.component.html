@@ -5,7 +5,25 @@
     <app-content-view>
         <div class="container-fluid">
             <div class="row">
-
+                <div class="offset-5 col-md-auto">
+                    <h1>Offers</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="progress col-md-12"
+                     style="height: 25px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                         role="progressbar"
+                         [style.fontSize]="'25px'"
+                         [style.width]="progressbarValue + '%'"><b>{{progressbarSeconds + ' sec.'}}</b></div>
+                </div>
+            </div>
+            <div class="row">
+                <app-offer class="col-md-4"
+                           [offer]="offer"
+                           *ngFor="let offer of offers; index as i;"
+                           (buyClick)="offerBy(offer)"
+                ></app-offer>
             </div>
         </div>
     </app-content-view>

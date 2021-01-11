@@ -2,7 +2,7 @@
     <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
     </button>
-    <div>{{budgets | currency}}</div>
+    <div><b>{{budgets | currency}}</b></div>
     <ng-content select="app-header"></ng-content>
 </mat-toolbar>
 <mat-drawer #drawer class="example-sidenav" mode="over">

@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="card-header">{{offer.name}}</div>
+    <div class="card-body">
+        <p>Price: <b>{{offer.price | currency}}</b></p>
+        {{offer.desc}}
+    </div>
+    <div class="card-footer">{{offer.perSecond | currency}}/sec.</div>
+    <button mat-flat-button (click)="buyClick.emit(offer)">Buy</button>
+</div>
