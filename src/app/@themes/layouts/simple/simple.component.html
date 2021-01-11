@@ -1,0 +1,23 @@
+<mat-toolbar class="example-header fixed-top">
+    <button type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <div>{{budgets | currency}}</div>
+    <ng-content select="app-header"></ng-content>
+</mat-toolbar>
+<mat-drawer #drawer class="example-sidenav" mode="over">
+    <mat-list>
+        <mat-list-item>
+            <button mat-icon-button class="example-icon" routerLink="/password-cards" (click)="drawer.toggle()">
+                <mat-icon color="primary">vpn_key</mat-icon>
+            </button>
+            <span>Main</span>
+        </mat-list-item>
+    </mat-list>
+</mat-drawer>
+<mat-drawer-container class="example-container" autosize>
+    <div class="example-sidenav-content">
+        <ng-content select="app-content-view"></ng-content>
+    </div>
+</mat-drawer-container>
+<app-footer></app-footer>

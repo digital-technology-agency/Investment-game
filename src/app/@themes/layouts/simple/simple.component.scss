@@ -1,0 +1,27 @@
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-sidenav {
+  margin-top: 64px;
+  display: flex;
+  width: 300px;
+}
+
+.example-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  /*background-image: linear-gradient(rgba(0, 0, 0, 0.41), rgba(0, 0, 0, 0.72)), url("~assets/setka.png");*/
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.example-sidenav-content {
+  margin-top: 64px;
+  width: 100%;
+  height: 80%;
+}
