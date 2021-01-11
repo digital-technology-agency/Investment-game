@@ -1,2 +1,2 @@
-# Investment-game
-Investment-game
+# Investment game
+
