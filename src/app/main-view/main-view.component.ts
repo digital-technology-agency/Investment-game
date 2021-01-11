@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StoreService} from '../@themes/core/store.service';
 import {Utils} from '../@themes/core/utils';
-import {interval} from 'rxjs';
+import {interval, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-main-view',
@@ -15,6 +16,7 @@ export class MainViewComponent implements OnInit {
     timeUpdate = interval(this.progressbarSeconds * 1000);
     progressUpdate = interval(1000);
     progressbarValue = 0;
+    private destroy$: Subject<void> = new Subject<void>();
 
 
     constructor(private store: StoreService) {
@@ -28,16 +30,17 @@ export class MainViewComponent implements OnInit {
                 this.generateOffers();
             });
         this.generateOffers();
+        this.progressUpdate.pipe(takeUntil(this.destroy$)).subscribe(res => {
+            this.progressbarSeconds -= 1;
+            this.progressbarValue -= this.progressbarValue / this.progressbarSeconds - 1;
+        });
     }
 
-
     generateOffers() {
+        this.destroy$.next();
+        this.destroy$.complete();
         this.progressbarValue = 100;
         this.progressbarSeconds = 30;
-        this.progressUpdate.pipe().subscribe(res => {
-            this.progressbarSeconds -= 1;
-            this.progressbarValue -= 1;
-        });
         this.offers = [];
         this.offers.push(...[
             {
