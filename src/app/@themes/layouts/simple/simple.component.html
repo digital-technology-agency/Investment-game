@@ -3,6 +3,8 @@
         <mat-icon>menu</mat-icon>
     </button>
     <div><b>{{budgets | currency}}</b></div>
+    <span class="example-spacer"></span>
+    <div>Step: <b>{{currentStep | number}}</b> Max: <b>{{maxStep | number}}</b></div>
     <ng-content select="app-header"></ng-content>
 </mat-toolbar>
 <mat-drawer #drawer class="example-sidenav" mode="over">

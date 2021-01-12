@@ -16,6 +16,7 @@ export class MainViewComponent implements OnInit {
     timeUpdate = interval(this.progressbarSeconds * 1000);
     progressUpdate = interval(1000);
     progressbarValue = 0;
+    currentStep = 0;
     private destroy$: Subject<void> = new Subject<void>();
 
 
@@ -61,7 +62,12 @@ export class MainViewComponent implements OnInit {
                 perSecond: Utils.RandomMinMax(0.01, 0.5),
                 price: Utils.getRandomMinMax(400, 1000),
             },
-        ])
+        ]);
+        this.store.getCurrentStep().subscribe((step: number) => {
+            this.currentStep = step;
+            this.currentStep += 1;
+            this.store.setCurrentStep(this.currentStep);
+        });
     }
 
     offerBy(offer: any) {

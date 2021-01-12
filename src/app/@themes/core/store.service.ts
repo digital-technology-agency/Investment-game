@@ -33,6 +33,17 @@ export class StoreService {
         localStorage.setItem(`${environment.prefixField}budget`, val);
     }
 
+    public setCurrentStep(val: any) {
+        localStorage.setItem(`${environment.prefixField}currentStep`, val);
+    }
+
+    public getCurrentStep() {
+        return new Observable(subscriber => {
+            const step = Number.parseInt(localStorage.getItem(`${environment.prefixField}currentStep`));
+            return subscriber.next(step);
+        });
+    }
+
     public property(): Observable<any> {
         return new Observable(subscriber => {
             let item: any[] = JSON.parse(localStorage.getItem(`${environment.prefixField}property`));
