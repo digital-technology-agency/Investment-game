@@ -14,13 +14,14 @@ import { OfferComponent } from './components/offer/offer.component';
 import { NewViewComponent } from './components/new-view/new-view.component';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {NbIconModule} from '@nebular/theme';
+import { SocialShareBtnComponent } from './components/social-share-btn/social-share-btn.component';
 
 const COMPONENTS = [
     HeaderComponent, FooterComponent, ContentViewComponent, SimpleComponent,
 ];
 
 @NgModule({
-    declarations: [...COMPONENTS, OfferComponent, NewViewComponent],
+    declarations: [...COMPONENTS, OfferComponent, NewViewComponent, SocialShareBtnComponent],
     exports: [CommonModule, ...COMPONENTS, OfferComponent, NewViewComponent],
     imports: [
         CommonModule,
@@ -32,6 +33,7 @@ const COMPONENTS = [
         MatSidenavModule,
         NbEvaIconsModule,
         NbIconModule,
+
     ],
 })
 export class ThemeModule {
