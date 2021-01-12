@@ -64,7 +64,7 @@ export class MainViewComponent implements OnInit {
             },
         ]);
         this.store.getCurrentStep().subscribe((step: number) => {
-            this.currentStep = step;
+            this.currentStep = step || 1;
             this.currentStep += 1;
             this.store.setCurrentStep(this.currentStep);
         });
