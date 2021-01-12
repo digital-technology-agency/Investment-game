@@ -4,7 +4,6 @@ import {Utils} from '../@themes/core/utils';
 import {interval, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
-
 @Component({
     selector: 'app-main-view',
     templateUrl: './main-view.component.html',
