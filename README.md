@@ -8,5 +8,5 @@
 [![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/)
 
 ### Facilities
-[![GitHub issues](https://img.shields.io/github/issues/digital-technology-agency/password-generator?color=0A0ECD)](https://github.com/digital-technology-agency/Investment-game/issues?q=is%3Aopen+is%3Aissue)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/digital-technology-agency/password-generator?style=flat)](https://github.com/digital-technology-agency/Investment-game/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub issues](https://img.shields.io/github/issues/digital-technology-agency/Investment-game?color=0A0ECD)](https://github.com/digital-technology-agency/Investment-game/issues?q=is%3Aopen+is%3Aissue)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/digital-technology-agency/Investment-game?style=flat)](https://github.com/digital-technology-agency/Investment-game/issues?q=is%3Aissue+is%3Aclosed)
