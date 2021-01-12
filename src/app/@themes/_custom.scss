@@ -1,6 +1,9 @@
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~material-icons/iconfont/material-icons.css";
+@import '~@nebular/theme/styles/theming';
+// @nebular out of the box themes
+@import '~@nebular/theme/styles/themes';
 
 
 @include mat-core();

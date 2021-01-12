@@ -8,6 +8,13 @@
                 <div class="offset-5 col-md-auto">
                     <h1>Offers</h1>
                 </div>
+                <div class="col-md-auto">
+                    <nb-icon style="color: #4c90d6; font-weight: bold;"
+                             (click)="refresh()"
+                             icon="refresh"
+                             [options]="{ animation: { type: 'zoom' } }">
+                    </nb-icon>
+                </div>
             </div>
             <div class="row">
                 <div class="progress col-md-12"
@@ -24,6 +31,15 @@
                            *ngFor="let offer of offers; index as i;"
                            (buyClick)="offerBy(offer)"
                 ></app-offer>
+            </div>
+            <div *ngIf="currentNew" class="row">
+                <div class="offset-5 col-md-auto">
+                    <h1>News</h1>
+                </div>
+            </div>
+            <div *ngIf="currentNew" class="row">
+                <app-new-view class="offset-1 col-md-9"
+                              [currentNew]="currentNew"></app-new-view>
             </div>
         </div>
     </app-content-view>

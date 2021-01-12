@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {Logger} from './logger-service';
+import {HttpClient} from '@angular/common/http';
+import {Utils} from './utils';
 
 const log = new Logger(`store`);
 
@@ -10,7 +12,13 @@ const log = new Logger(`store`);
 })
 export class StoreService {
 
-    constructor() {
+    maxStep = 365;
+    news: any[] = [];
+
+    constructor(private http: HttpClient) {
+        this.http.get('assets/news.json').subscribe((resp: any[]) => {
+            this.news = resp;
+        });
     }
 
     public budget(): Observable<any> {
@@ -35,6 +43,35 @@ export class StoreService {
 
     public setCurrentStep(val: any) {
         localStorage.setItem(`${environment.prefixField}currentStep`, val);
+    }
+
+    public getMaxStep(): number {
+        let maxStep = Number.parseInt(localStorage.getItem(`${environment.prefixField}maxStep`));
+        if (!maxStep) {
+            maxStep = this.maxStep;
+            this.setMaxStep(this.maxStep);
+        }
+        return maxStep;
+    }
+
+    public setMaxStep(val: any) {
+        localStorage.setItem(`${environment.prefixField}maxStep`, val);
+
+    }
+
+    public randomNew(): any {
+        let randomIndex = Utils.getRandomMinMax(0, this.news.length);
+        let currentNew = this.news[randomIndex];
+        localStorage.setItem(`${environment.prefixField}currentNew`, JSON.stringify(currentNew));
+        return currentNew;
+    }
+
+    public currentNew(): any {
+        let item: any = localStorage.getItem(`${environment.prefixField}currentNew`) || null;
+        if (item === 'undefined') {
+            return this.randomNew()
+        }
+        return JSON.parse(item);
     }
 
     public getCurrentStep() {
@@ -64,6 +101,10 @@ export class StoreService {
     public setProperty(val: any[]) {
         let item = JSON.stringify(val);
         localStorage.setItem(`${environment.prefixField}property`, item);
+    }
+
+    public restart() {
+        localStorage.clear();
     }
 
 }

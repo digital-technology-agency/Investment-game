@@ -29,6 +29,7 @@ import {A11yModule} from '@angular/cdk/a11y';
 import {MatCommonModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
 import { MainViewComponent } from './main-view/main-view.component';
+import {NbIconModule} from '@nebular/theme';
 
 const MATERIAL_MODULES = [
     MatCommonModule,
@@ -67,6 +68,7 @@ const MATERIAL_MODULES = [
         A11yModule,
         ...MATERIAL_MODULES,
         ThemeModule,
+        NbIconModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

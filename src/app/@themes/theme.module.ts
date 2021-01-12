@@ -11,14 +11,17 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { OfferComponent } from './components/offer/offer.component';
+import { NewViewComponent } from './components/new-view/new-view.component';
+import {NbEvaIconsModule} from '@nebular/eva-icons';
+import {NbIconModule} from '@nebular/theme';
 
 const COMPONENTS = [
     HeaderComponent, FooterComponent, ContentViewComponent, SimpleComponent,
 ];
 
 @NgModule({
-    declarations: [...COMPONENTS, OfferComponent],
-    exports: [CommonModule, ...COMPONENTS, OfferComponent],
+    declarations: [...COMPONENTS, OfferComponent, NewViewComponent],
+    exports: [CommonModule, ...COMPONENTS, OfferComponent, NewViewComponent],
     imports: [
         CommonModule,
         RouterModule,
@@ -27,6 +30,8 @@ const COMPONENTS = [
         MatButtonModule,
         MatListModule,
         MatSidenavModule,
+        NbEvaIconsModule,
+        NbIconModule,
     ],
 })
 export class ThemeModule {

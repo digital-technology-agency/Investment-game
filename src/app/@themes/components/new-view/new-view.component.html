@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-header">{{currentNew?.name}}</div>
+    <div class="card-body">
+        <p>{{currentNew?.desc}}</p>
+    </div>
+    <div class="card-footer">
+        <b>{{currentNew?.coeff  | percent}} /sec. </b>
+        <nb-icon *ngIf="iconType == 'up' "style="color: green; font-weight: bold;"
+                 icon="arrow-up"
+                 [options]="{ animation: { type: 'zoom' } }">
+        </nb-icon>
+        <nb-icon *ngIf="iconType == 'down' "style="color: red; font-weight: bold;"
+                 icon="arrow-down"
+                 [options]="{ animation: { type: 'zoom' } }">
+        </nb-icon>
+    </div>
+</div>

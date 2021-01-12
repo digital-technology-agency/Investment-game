@@ -15,17 +15,18 @@ export class SimpleComponent implements OnInit {
 
     budgets: number = 0.0;
     property: any[] = [];
-    maxStep = 365;
+    maxStep = 30;
     currentStep = 0;
+    currentNew: any;
 
     timeUpdate = interval(1000);
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(private store: StoreService) {
-
     }
 
     ngOnInit() {
+        this.maxStep = this.store.getMaxStep();
         this.store.budget().subscribe(res => {
             this.budgets = res;
         });
@@ -46,7 +47,7 @@ export class SimpleComponent implements OnInit {
                     .subscribe((perSeconds: number[]) => {
                         this.store.getCurrentStep().subscribe((step: number) => {
                             this.currentStep = step;
-                            if (this.currentStep === this.maxStep) {
+                            if (this.currentStep >= this.maxStep) {
                                 this.destroy$.next();
                                 this.destroy$.complete();
                                 return;
@@ -54,11 +55,18 @@ export class SimpleComponent implements OnInit {
                             this.store.budget().subscribe(res => {
                                 this.budgets = res;
                                 let reduce = perSeconds.reduce((a, b) => a + b);
-                                this.budgets += reduce;
+                                /*news*/
+                                this.currentNew = this.store.currentNew();
+                                this.budgets += reduce * (1.00 + this.currentNew.coeff);
                                 this.store.setBudget(this.budgets);
                             });
                         });
                     });
             });
+    }
+
+    restart() {
+        this.store.restart();
+        window.location.reload();
     }
 }

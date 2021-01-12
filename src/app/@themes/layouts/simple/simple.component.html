@@ -2,9 +2,9 @@
     <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
     </button>
-    <div><b>{{budgets | currency}}</b></div>
+    <div><b>{{budgets | currency}}</b> <!--Bonus: <b>{{currentNew?.coeff | percent}}</b> /sec.--></div>
     <span class="example-spacer"></span>
-    <div>Step: <b>{{currentStep | number}}</b> Max: <b>{{maxStep | number}}</b></div>
+    <div>Day: <b>{{currentStep | number}}</b> Max: <b>{{maxStep | number}}</b></div>
     <ng-content select="app-header"></ng-content>
 </mat-toolbar>
 <mat-drawer #drawer class="example-sidenav" mode="over">
@@ -14,6 +14,12 @@
                 <mat-icon color="primary">vpn_key</mat-icon>
             </button>
             <span>Main</span>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-icon-button class="example-icon" (click)="restart()">
+                <mat-icon color="primary">business</mat-icon>
+            </button>
+            <span>Start over</span>
         </mat-list-item>
     </mat-list>
 </mat-drawer>
