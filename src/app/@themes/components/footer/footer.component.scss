@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+
 .footer {
   font-size: 12px;
   width: 100%;
@@ -8,5 +10,54 @@
 
   select {
     font-size: 12px;
+  }
+
+}
+
+.title {
+  margin-top: 5px;
+  font-size: 30px;
+  font-family: 'Jura', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  animation: title__opacity__1 521ms 0ms linear forwards, title__opacity__2 388ms 521ms linear forwards;
+
+  > a {
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 18px;
+    color: #003E4E;
+  }
+
+  :hover {
+    color: #ff0635;
+    transition: all 300ms ease-in-out;
+  }
+
+  :active {
+    color: #d2ccff;
+    animation: clickOn 500ms 0ms linear forwards;
+  }
+}
+
+@keyframes title__opacity__1 {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+@keyframes title__opacity__2 {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
