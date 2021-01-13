@@ -72,7 +72,9 @@ const MATERIAL_MODULES = [
         ...MATERIAL_MODULES,
         ThemeModule,
         NbIconModule,
-        NgxEchartsModule.forRoot({echarts: echarts}),
+        NgxEchartsModule.forRoot({
+            echarts: { init: echarts.init }
+        }),
     ],
     providers: [CurrencyPipe],
     bootstrap: [AppComponent],

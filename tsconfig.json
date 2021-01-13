@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "skipLibCheck": true,
@@ -21,9 +20,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "echarts": [
+        "node_modules/echarts/dist/echarts.min.js"
+      ]
+    }
   },
   "angularCompilerOptions": {
+    "enableIvy": false,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "disableTypeScriptVersionCheck": true
