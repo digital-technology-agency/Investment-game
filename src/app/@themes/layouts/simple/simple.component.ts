@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {interval, Subject} from 'rxjs';
 import {StoreService} from '../../core/store.service';
 import {Logger} from '../../core/logger-service';
-import {filter, flatMap, map, pluck, reduce, takeUntil, tap} from 'rxjs/operators';
+import {filter, map, takeUntil} from 'rxjs/operators';
 
 const log = new Logger(`app-simple`);
 
@@ -11,7 +11,7 @@ const log = new Logger(`app-simple`);
     templateUrl: './simple.component.html',
     styleUrls: ['./simple.component.scss'],
 })
-export class SimpleComponent implements OnInit {
+export class SimpleComponent implements OnInit, OnDestroy {
 
     budgets: number = 0.0;
     property: any[] = [];
@@ -37,7 +37,7 @@ export class SimpleComponent implements OnInit {
             this.currentStep = step;
         });
         this.timeUpdate
-            .pipe()
+            .pipe(takeUntil(this.destroy$))
             .subscribe(res => {
                 this.store.property()
                     .pipe(
@@ -53,16 +53,26 @@ export class SimpleComponent implements OnInit {
                                 return;
                             }
                             this.store.budget().subscribe(res => {
+
+
                                 this.budgets = res;
                                 let reduce = perSeconds.reduce((a, b) => a + b);
                                 /*news*/
                                 this.currentNew = this.store.currentNew();
-                                this.budgets += reduce * (1.00 + this.currentNew.coeff);
+                                let coefficient = 1.00 + this.currentNew.coeff;
+                                this.budgets += reduce * coefficient;
+                                this.store.tikCoefficientEndChange.emit(coefficient);
                                 this.store.setBudget(this.budgets);
                             });
                         });
                     });
             });
+    }
+
+    ngOnDestroy(): void {
+        log.debug('destr');
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     restart() {

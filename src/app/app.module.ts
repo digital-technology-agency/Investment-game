@@ -28,8 +28,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {A11yModule} from '@angular/cdk/a11y';
 import {MatCommonModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
-import { MainViewComponent } from './main-view/main-view.component';
+import {MainViewComponent} from './main-view/main-view.component';
 import {NbIconModule} from '@nebular/theme';
+import {NgxEchartsModule} from 'ngx-echarts';
+import {CurrencyPipe} from '@angular/common';
+import * as echarts from 'echarts';
 
 const MATERIAL_MODULES = [
     MatCommonModule,
@@ -69,8 +72,9 @@ const MATERIAL_MODULES = [
         ...MATERIAL_MODULES,
         ThemeModule,
         NbIconModule,
+        NgxEchartsModule.forRoot({echarts: echarts}),
     ],
-    providers: [],
+    providers: [CurrencyPipe],
     bootstrap: [AppComponent],
 })
 export class AppModule {

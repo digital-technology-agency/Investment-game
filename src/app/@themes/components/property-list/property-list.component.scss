@@ -1,0 +1,29 @@
+.example-container {
+  height: 400px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  margin: 5px;
+
+  table {
+    width: 100%;
+
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+
+  }
+
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {Logger} from './logger-service';
@@ -14,6 +14,13 @@ export class StoreService {
 
     maxStep = 365;
     news: any[] = [];
+    @Output() addPropertyChange: EventEmitter<any> = new EventEmitter();
+    @Output() removePropertyChange: EventEmitter<any> = new EventEmitter();
+    @Output() stepEndChange: EventEmitter<any> = new EventEmitter();
+    @Output() tikEndChange: EventEmitter<any> = new EventEmitter();
+    @Output() tikCoefficientEndChange: EventEmitter<any> = new EventEmitter();
+    @Output() sellPropertyChange: EventEmitter<any> = new EventEmitter();
+
 
     constructor(private http: HttpClient) {
         this.http.get('assets/news.json').subscribe((resp: any[]) => {
@@ -43,6 +50,20 @@ export class StoreService {
 
     public setCurrentStep(val: any) {
         localStorage.setItem(`${environment.prefixField}currentStep`, val);
+        let budget = Number.parseFloat(localStorage.getItem(`${environment.prefixField}budget`));
+        let budgetChartItems: any[] = this.getBudgetChartItems();
+        let item = {step: val, budget: budget};
+        budgetChartItems.push(item);
+        localStorage.setItem(`${environment.prefixField}budget-charts`, JSON.stringify(budgetChartItems));
+        this.tikEndChange.emit(item);
+    }
+
+    public getBudgetChartItems(): any[] {
+        let budgetChartItems: any[] = JSON.parse(localStorage.getItem(`${environment.prefixField}budget-charts`));
+        if (!budgetChartItems) {
+            budgetChartItems = [];
+        }
+        return budgetChartItems;
     }
 
     public getMaxStep(): number {
@@ -96,11 +117,23 @@ export class StoreService {
         this.budgetAdd(-val.price);
         item.push(val);
         this.setProperty(item);
+        this.addPropertyChange.emit(item);
     }
 
     public setProperty(val: any[]) {
         let item = JSON.stringify(val);
         localStorage.setItem(`${environment.prefixField}property`, item);
+    }
+
+    public sellProperty(val: any) {
+        let item: any[] = JSON.parse(localStorage.getItem(`${environment.prefixField}property`));
+        if (!item) {
+            item = [];
+        }
+        item.splice(item.indexOf(val), 1);
+        this.budgetAdd(val.price);
+        this.setProperty(item);
+        this.sellPropertyChange.emit(item);
     }
 
     public restart() {

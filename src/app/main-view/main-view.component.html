@@ -5,8 +5,15 @@
     <app-content-view>
         <div class="container-fluid">
             <div class="row">
-                <div class="offset-5 col-md-auto">
-                    <h1>Offers</h1>
+                <div class="col-md-auto">
+                    <h2>Offers</h2>
+                </div>
+                <div class="progress col-md-10"
+                     style="height: 25px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                         role="progressbar"
+                         [style.fontSize]="'25px'"
+                         [style.width]="progressbarValue + '%'"><b>{{progressbarSeconds + ' sec.'}}</b></div>
                 </div>
                 <div class="col-md-auto">
                     <nb-icon style="color: #4c90d6; font-weight: bold;"
@@ -17,13 +24,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="progress col-md-12"
-                     style="height: 25px;">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated"
-                         role="progressbar"
-                         [style.fontSize]="'25px'"
-                         [style.width]="progressbarValue + '%'"><b>{{progressbarSeconds + ' sec.'}}</b></div>
-                </div>
             </div>
             <div class="row">
                 <app-offer class="col-md-4"
@@ -32,14 +32,21 @@
                            (buyClick)="offerBy(offer)"
                 ></app-offer>
             </div>
-            <div *ngIf="currentNew" class="row">
-                <div class="offset-5 col-md-auto">
-                    <h1>News</h1>
+            <div class="row">
+                <div class="col-md-auto">
+                    <!--<h3>Property</h3>-->
                 </div>
             </div>
-            <div *ngIf="currentNew" class="row">
-                <app-new-view class="offset-1 col-md-9"
-                              [currentNew]="currentNew"></app-new-view>
+            <div class="row">
+                <app-property-list class="col-md-8"></app-property-list>
+                <app-new-view
+                        *ngIf="currentNew"
+                        class="col-md-4"
+                        [currentNew]="currentNew"></app-new-view>
+            </div>
+            <div class="row">
+                <app-charts-view
+                        class="col-md-12"></app-charts-view>
             </div>
         </div>
     </app-content-view>
