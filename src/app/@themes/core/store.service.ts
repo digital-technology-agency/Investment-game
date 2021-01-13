@@ -51,6 +51,9 @@ export class StoreService {
     public setCurrentStep(val: any) {
         localStorage.setItem(`${environment.prefixField}currentStep`, val);
         let budget = Number.parseFloat(localStorage.getItem(`${environment.prefixField}budget`));
+        if (!budget) {
+            budget = 0.0;
+        }
         let budgetChartItems: any[] = this.getBudgetChartItems();
         let item = {step: val, budget: budget};
         budgetChartItems.push(item);
