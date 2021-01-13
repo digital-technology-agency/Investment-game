@@ -1,19 +1,16 @@
 .example-container {
-  height: 400px;
+  height: 300px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
-  margin: 5px;
+}
 
-  table {
-    width: 100%;
+table {
+  width: 100%;
+}
 
-    .example-spacer {
-      flex: 1 1 auto;
-    }
-
-  }
-
+.example-spacer {
+  flex: 1 1 auto;
 }
 
 ::-webkit-scrollbar {
