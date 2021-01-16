@@ -54,11 +54,27 @@ export class StoreService {
         if (!budget) {
             budget = 0.0;
         }
+        let properties: any[] = JSON.parse(localStorage.getItem(`${environment.prefixField}property`));
+        if (!properties) {
+            properties = [];
+        }
+        let propertiesChartItems: any[] = this.getPropertyChartItems();
+        propertiesChartItems.push({step: val, propertyCount: properties.length});
+        localStorage.setItem(`${environment.prefixField}property-charts`, JSON.stringify(propertiesChartItems));
+
         let budgetChartItems: any[] = this.getBudgetChartItems();
         let item = {step: val, budget: budget};
         budgetChartItems.push(item);
         localStorage.setItem(`${environment.prefixField}budget-charts`, JSON.stringify(budgetChartItems));
         this.tikEndChange.emit(item);
+    }
+
+    public getPropertyChartItems(): any[] {
+        let chartItems: any[] = JSON.parse(localStorage.getItem(`${environment.prefixField}property-charts`));
+        if (!chartItems) {
+            chartItems = [];
+        }
+        return chartItems;
     }
 
     public getBudgetChartItems(): any[] {
@@ -128,13 +144,13 @@ export class StoreService {
         localStorage.setItem(`${environment.prefixField}property`, item);
     }
 
-    public sellProperty(val: any) {
+    public sellProperty(val: any, price: number) {
         let item: any[] = JSON.parse(localStorage.getItem(`${environment.prefixField}property`));
         if (!item) {
             item = [];
         }
         item.splice(item.indexOf(val), 1);
-        this.budgetAdd(val.price);
+        this.budgetAdd(price);
         this.setProperty(item);
         this.sellPropertyChange.emit(item);
     }

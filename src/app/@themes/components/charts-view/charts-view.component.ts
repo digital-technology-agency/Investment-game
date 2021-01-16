@@ -11,6 +11,7 @@ export class ChartsViewComponent implements OnInit {
     options: any = {};
     steps = [];
     value = [];
+    propertuCountValue = [];
 
     constructor(private store: StoreService,
                 private currencyPipe: CurrencyPipe) {
@@ -25,20 +26,25 @@ export class ChartsViewComponent implements OnInit {
 
     initData() {
         let budgetChartItems = this.store.getBudgetChartItems();
+        let propertyChartItems = this.store.getPropertyChartItems();
         this.steps = [];
         this.value = [];
+        this.propertuCountValue = [];
         budgetChartItems.forEach(item => {
             this.steps.push(`${item.step}`);
             this.value.push(Math.round((item.budget + Number.EPSILON) * 100) / 100);
         });
+        propertyChartItems.forEach(item => {
+            this.propertuCountValue.push(item.propertyCount);
+        });
         this.options = {
             backgroundColor: '#ffffff',
-            color: ['#1221ff'],
+            color: ['#1221ff', '#ff000b'],
             legend: {
-                data: ['Budget'],
+                data: ['Budget', 'Property'],
                 align: 'left',
                 textStyle: {
-                    color: '#1221ff',
+                    color: '#000000',
                 },
             },
             tooltip: {
@@ -47,24 +53,26 @@ export class ChartsViewComponent implements OnInit {
                     type: 'shadow',
                 },
             },
-
             xAxis: [
                 {
                     data: this.steps,
                     silent: false,
-                    axisTick: {
-                        alignWithLabel: true,
+                    splitLine: {
+                        show: false,
                     },
-                    axisLine: {
-                        lineStyle: {
-                            color: '#1221ff',
-                        },
-                    },
-                    axisLabel: {
-                        textStyle: {
-                            color: '#363557',
-                        },
-                    },
+                    /*  axisTick: {
+                          alignWithLabel: true,
+                      },
+                      axisLine: {
+                          lineStyle: {
+                              color: '#1221ff',
+                          },
+                      },
+                      axisLabel: {
+                          textStyle: {
+                              color: '#363557',
+                          },
+                      },*/
                 },
             ],
             yAxis: [
@@ -76,9 +84,7 @@ export class ChartsViewComponent implements OnInit {
                         },
                     },
                     splitLine: {
-                        lineStyle: {
-                            color: '#000000',
-                        },
+                        lineStyle: {},
                     },
                     axisLabel: {
                         textStyle: {
@@ -95,6 +101,13 @@ export class ChartsViewComponent implements OnInit {
                     data: this.value,
                     animationDelay: idx => idx * 10,
                 },
+             /*   {
+                    name: 'Property',
+                    type: 'bar',
+                    barWidth: '90%',
+                    data: this.propertuCountValue,
+                    animationDelay: (idx) => idx * 10 + 100,
+                },*/
             ],
             animationEasing: 'elasticOut',
             animationDelayUpdate: idx => idx * 5,

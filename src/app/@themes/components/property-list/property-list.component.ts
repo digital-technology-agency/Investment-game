@@ -42,9 +42,21 @@ export class PropertyListComponent implements OnInit {
     }
 
     sell(item: any) {
-        this.store.sellProperty(item);
+        this.store.sellProperty(item, this.sellPrice(item));
         this.properties.splice(this.properties.indexOf(item), 1);
         this.properties = [...this.properties];
+    }
+
+    companyResell(offer: any) {
+        return offer.income > offer.price;
+    }
+
+    sellPrice(offer: any) {
+        if (offer.income > offer.price) {
+            return (offer.price * (1 + offer.perSecond)) + (offer.income - offer.price);
+        } else {
+            return offer.price * (1 - offer.perSecond);
+        }
     }
 
 }
