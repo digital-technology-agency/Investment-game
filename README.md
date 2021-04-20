@@ -2,6 +2,8 @@
 
 [Demo](https://digital-technology-agency.github.io/Investment-game/)
 
+[Агентство цифровых технологий](https://dta.agency)
+
 ![DTA github stats](https://github-readme-stats.vercel.app/api?username=digitaltechnologyagency&show_icons=true)
 
 # Introduction
